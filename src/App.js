@@ -1,24 +1,21 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { Button } from "@material-ui/core";
+import Layout from "./hoc/Layout/Layout";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Patients from "./components/Patients/Patients";
+import Stats from "./components/Stats/Stats";
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button variant="raised" color="primary">
-          Hello
-        </Button>
-      </div>
+    const routes = (
+      <Switch>
+        <Route path="/patients" component={Patients} />
+        <Route path="/stats" component={Stats} />
+        <Redirect to="/patients" />
+      </Switch>
     );
+
+    return <Layout>{routes}</Layout>;
   }
 }
 
